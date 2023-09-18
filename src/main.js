@@ -2,4 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import store from './store'
 
-createApp(App).use(store).mount('#app')
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+createApp(App).use(store,VueAxios, axios).mount('#app')
