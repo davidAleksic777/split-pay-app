@@ -44,7 +44,6 @@ const blured = (index) => {
     let price = selectFields.value[index].price;
     if( price != 0 && price !== undefined && price !== null && price !== "" ){
         selectFields.value[index].lockedPrice = true;
-
     }
 }
 
