@@ -3,8 +3,8 @@
         <div v-for="(item, index) in selectFields" :key="index">
             <div class="row justify-content-between">
                 <div class="col-3">
-                    <label for="price" class="form-label d-flex justify-content-left">Price</label>
-                    <input type="number" id="price" :disabled="item.lockedPrice"
+                    <label :for="`price-${index}`" class="form-label d-flex justify-content-left">Price</label>
+                    <input type="number" :id="`price-${index}`" :disabled="item.lockedPrice"
                         v-model="item.price" @blur="blured(index)" style="width: 100%;">
                     <span>(click outside the price box to confirm the price)</span>
                 </div>
@@ -13,9 +13,9 @@
                     PLEASE ENTER THE PRICE BEFORE CHOOSING USERS TO BILL!
                   </div>
                   <div v-else>
-                    <label for="name" class="form-label d-flex justify-content-left">Select User</label>
-                    <VueMultiselect v-model="item.selected" :id="index" @remove="removed" @select="selected"
-                        :multiple="true" :options="options" id="name" label="name" track-by="id">
+                    <label :for="index" class="form-label d-flex justify-content-left">Select User</label>
+                    <VueMultiselect v-model="item.selected"  @remove="removed" @select="selected"
+                        :multiple="true" :options="options" :id="index" label="name" track-by="id">
                     </VueMultiselect>
                   </div>
                 </div>
@@ -40,8 +40,11 @@ const selectFields = ref([])
 
 const blured = (index) => {
     let id = selectFields.value.length - 1;
+
     store.commit('addItem', { id: id, itemPrice: selectFields.value[id].price, usersInvolved: 0 })
+
     let price = selectFields.value[index].price;
+
     if( price != 0 && price !== undefined && price !== null && price !== "" ){
         selectFields.value[index].lockedPrice = true;
     }
@@ -52,7 +55,6 @@ const addItem = () => {
 }
 
 const selected = (item, id) => {
-
     let payloadObj = {
         id: item.id,
         itemId: id,
@@ -64,7 +66,6 @@ const selected = (item, id) => {
 }
 
 const removed = (item, id) => {
-
     let payloadObj = {
         personId: item.id,
         itemId: id

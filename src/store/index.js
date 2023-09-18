@@ -10,7 +10,7 @@ export default createStore({
 
       let items = [];
       ids.forEach(element => {
-        let item = state.items.find(iii => iii.id === element);
+        let item = state.items.find(userItem => userItem.id === element);
         items.push(item)
       });
       return items;
@@ -31,12 +31,6 @@ export default createStore({
       item.usersInvolved += 1;
       item.splitPrice = item.itemPrice / item.usersInvolved;
 
-    },
-    updateItemPrice(state, payload) {
-      console.log(payload)
-      let item = state.items.find(item => item.id === payload.id);
-      console.log(item)
-      item.price = payload.itemPrice;
     },
     removeItemFromUser(state, payload) {
       let item = state.items.find(item => item.id === payload.itemId);
