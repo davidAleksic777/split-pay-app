@@ -39,9 +39,8 @@ const options = ref([]);
 const selectFields = ref([])
 
 const blured = (index) => {
-    let id = selectFields.value.length - 1;
-
-    store.commit('addItem', { id: id, itemPrice: selectFields.value[id].price, usersInvolved: 0 })
+    
+    store.commit('addItem', { id: index, itemPrice: selectFields.value[index].price, usersInvolved: 0 })
 
     let price = selectFields.value[index].price;
 
